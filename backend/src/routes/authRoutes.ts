@@ -1,8 +1,8 @@
 // src/routes/authRoutes.ts
-import express from 'express';
+import { Router } from 'express';
 import authController from '../controllers/authController';
 
-const router = express.Router();
+const router = Router();
 
 router.post('/login', authController.login);
 

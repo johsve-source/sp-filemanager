@@ -1,6 +1,6 @@
 // src/middleware/fileUploadMiddleware.ts
-import multer, { Request, Express } from 'multer';
-import { NextFunction } from 'express';
+import { Request, Response, NextFunction } from 'express';
+import multer from 'multer';
 
 const storage = multer.diskStorage({
   destination: 'uploads/',
@@ -15,10 +15,13 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-const fileUploadMiddleware = upload.single('file');
-
-export default fileUploadMiddleware as (
+const fileUploadMiddleware = (
   req: Request,
   res: Response,
   next: NextFunction
-) => void;
+) => {
+  // Your middleware logic here
+  upload.single('file')(req, res, next);
+};
+
+export default fileUploadMiddleware;
